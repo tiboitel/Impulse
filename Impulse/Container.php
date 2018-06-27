@@ -11,9 +11,9 @@ class Container implements ContainerInterface
 	private		$definitions;
 	private		$singletons;
 
-	public function __construct($definitions = array(), $singletons = array())
+	public function __construct($definitions = [], $singletons = [])
 	{
-		$this->definitions = $definitons;
+		$this->definitions = $definitions;
 		$this->singletons = $singletons;
 	} 
 
@@ -78,12 +78,12 @@ class Container implements ContainerInterface
 	private function create_definition($class_name)
 	{
 		$reflection = new \ReflectionClass($class_name);
-		$args = [];
+		$arguments = [];
 		if (($constructor = $reflection->getConstructor()) === NULL)
 			throw new \RuntimeException("Can't find a valid constructor for the class" . $class_name);
-		if (($parameters = $constructor->getParameters) !== NULL)
+		if (($parameters = $constructor->getParameters()) !== NULL)
 		{
-			foreach($constructor->getParamaters() as $parameter)
+			foreach($constructor->getParameters() as $parameter)
 			{
 				if ($paramter_class = $parameter->getClass()) {
 					$arguments[] = $this->get($paramaterClass->getName());

@@ -13,12 +13,14 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 abstract class RequestHandler implements RequestHandlerInterface
 {
+	protected $queue;
+
 	public function __construct($queue, callable $resolver = null)
 	{
 		if  (!is_iterable($queue)) {
 			throw new RuntimeException('\$queue must be array or Iterable');
 		}
-		$this->queue = queue;
+		$this->queue = $queue;
 		if ($resolver === null) {
 			$resolver = function ($entry) {
 				return ($entry);
@@ -31,5 +33,5 @@ abstract class RequestHandler implements RequestHandlerInterface
 	 * Handles the current entry in the middleware queue and advances.
 	 *
 	 */
-	abstract public function handle(ServerRequestInterface $request);
+	abstract public function handle(ServerRequestInterface $request) : ResponseInterface;
 }

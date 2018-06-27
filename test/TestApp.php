@@ -2,7 +2,7 @@
 	require_once DIRNAME(__DIR__)  . '/vendor/autoload.php';
 
 $app = new \Impulse\App();
-$container = new \Impulse\Container();
+$container = $app->get_container();
 $middleware_queue = [];
 $request_handler = new \Impulse\Dispatcher($middleware_queue);
 try

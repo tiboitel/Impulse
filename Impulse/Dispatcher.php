@@ -7,7 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class Dispatcher extends RequestHandler
 {
-	public function handle(ServerRequestInterface $request)
+	public function handle(ServerRequestInterface $request) : ResponseInterface
 	{
 		reset($this->queue);
 		$runner = new Runner($this->queue, $this->resolver);
