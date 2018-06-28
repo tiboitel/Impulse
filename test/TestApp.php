@@ -5,11 +5,9 @@ $app = new \Impulse\App();
 $container = $app->get_container();
 $middleware_queue = [];
 $request_handler = new \Impulse\Dispatcher($middleware_queue);
-try
-{
-	$hello_world = $container->get(\ExampleApp\HelloWorld::class);
-} catch (\Exception $e) {
-	echo $e->getMessage();
-}
+$router = new \Impulse\Router\ArrayRouter();
+//$router->addRoute(new Route(IRequestMatcher $matcher, RequestHandler $handler);
+$router_request_handler = new \Impulse\Router\RouterRequestHandler($router, HelloWorld::class);
+$response = $router_request_handler->handle($request, HelloWorld::class);
 $hello_world->announce();
 $app->run();
