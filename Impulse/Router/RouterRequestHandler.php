@@ -3,6 +3,7 @@
 namespace Impulse\Router;
 
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class RouterRequestHandler implements RequestHandlerInterface
@@ -16,7 +17,7 @@ class RouterRequestHandler implements RequestHandlerInterface
 		$this->failover_callback = $request_handler;
 	}
 
-	public function handle(ServerRequestInterface $request)
+	public function handle(ServerRequestInterface $request) : ResponseInterface
 	{
 		if (($request_handler = $this->router->route($request)) === null) {
 			return ($this->failover_callback->handle($request));

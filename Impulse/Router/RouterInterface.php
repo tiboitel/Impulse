@@ -4,7 +4,7 @@ namespace Impulse\Router;
 
 use Psr\Http\Message\ServerRequestInterface;
 
-interface IRouter
+interface RouterInterface
 {
 	public function route(ServerRequestInterface $request);
 }
